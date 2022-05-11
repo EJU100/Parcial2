@@ -6,21 +6,59 @@ var sql = 'SELECT * FROM category LIMIT 10';
 debugger 
 // Parámetros de conexión a la base de datos.
 var con = mysql.createConnection({
-  host: "127.0.0.1",
+  host: "localhost",
   user: "root",
-  password: "MedInf100!",
+  password: "itesm2022",
   database : 'parcial2_a01760042'
 });
 
 
 //Funcion que nos permite comprobar la conexión a la base de datos.
-/* con.connect(function(err) {
+con.connect(function(err) {
    if (err) throw err;
   console.log("Connected!");
- });*/
+
+  // Inserte dos nuevos registros sobre la tabla Alumnos
+  con.query("INSERT INTO Alumnos(Nombre, Identificador, Email, Carrera) VALUES('Eren', 'A01760042','a01760042@tec.mx','estudiante'), ('Jesus', 'a00112233','a00112233@tec.mx','estudiante')", function (err, result, fields) {
+    if (err) throw err;
+    console.log(result);
+  });
+
+  // Consultar información de la tabla Alumnos
+  con.query("SELECT * FROM Alumnos", function (err, result, fields) {
+    if (err) throw err;
+    console.log(result);
+  });
+
+  // Actualizar el nombre del segundo registro de la tabla Alumnos.
+  con.query("UPDATE Alumnos SET Nombre = 'BORRAR ALUMNO' WHERE Id = 14", function (err, result) {
+    if (err) throw err;
+    console.log(result);
+  });
+
+  // Consultar información de la tabla Alumnos
+  con.query("SELECT * FROM Alumnos", function (err, result, fields) {
+    if (err) throw err;
+    console.log(result);
+  });
+
+  // Borrar segundo registro de la tabla Alumnos.
+  con.query("DELETE FROM Alumnos WHERE Id = 14", function (err, result) {
+    if (err) throw err;
+    console.log(result);
+  });
+
+  // Consultar información de la tabla Alumnos
+  con.query("SELECT * FROM Alumnos", function (err, result, fields){
+    if (err) throw err;
+    console.log(result);
+  });
+ });
+
+
 
 // Funcion que nos devolverá resultados de la base de datos.
- con.connect(function(err) {
+ /*con.connect(function(err) {
   if (err) throw err;
   //console.log("Connected!");
   con.query(sql, function (err, result) {
@@ -41,4 +79,4 @@ app.get("/", function (req, res) {
 });
 app.listen(3000, function () {
     console.log('Instalación correcta, Hola!');
-});
+});*/
